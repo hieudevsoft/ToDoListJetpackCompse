@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">To-Do Compose</string>
+    <string name="search_place_holder">Search...</string>
+</resources>
