@@ -19,6 +19,12 @@ val MediumPriorityColor = Color(0xFFFFC114)
 val HighPriorityColor = Color(0xFFFF4646)
 val NonePriorityColor = Color(0xFF4B4B4B)
 
+val Colors.todoItemBackgroundColor:Color
+    get()= if(isLight) Color.White else Color.Black
+
+val Colors.todoTextColor:Color
+    get()= if(isLight) Color.DarkGray else Color.White
+
 val Colors.fabBackgroundColor:Color
     get() = if(isLight) Teal200 else Purple700
 
@@ -26,4 +32,4 @@ val Colors.topBarContentColor:Color
     get() = if(isLight) Color.LightGray else LightGray
 
 val Colors.topBarBackgroundColor:Color
-    get() = if(isLight) Purple500 else DarkGray
+    get() = if(isLight) Purple500 else Color.Black
