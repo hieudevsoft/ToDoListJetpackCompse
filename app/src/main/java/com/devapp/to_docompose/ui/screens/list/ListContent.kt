@@ -20,18 +20,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.devapp.to_docompose.data.models.Priority
 import com.devapp.to_docompose.data.models.ToDoTask
 import com.devapp.to_docompose.ui.theme.*
+import com.devapp.to_docompose.util.RequestState
 
 @ExperimentalMaterialApi
 @Composable
 fun ListContent(
-    listToDoTask: List<ToDoTask>,
+    listToDoTask: RequestState<List<ToDoTask>>,
     navigationToTask: (taskId: Int) -> Unit
 ) {
-    if (listToDoTask.isEmpty()) {
-        EmptyTasks()
-    } else {
-        DisplayTasks(listToDoTask = listToDoTask, navigationToTask = navigationToTask)
+    if(listToDoTask is RequestState.Success){
+        if(listToDoTask.data.isEmpty()) EmptyTasks()
+        else
+        DisplayTasks(listToDoTask = listToDoTask.data, navigationToTask = navigationToTask)
     }
+
 }
 
 @ExperimentalMaterialApi
@@ -40,16 +42,16 @@ fun DisplayTasks(
     listToDoTask: List<ToDoTask>,
     navigationToTask: (taskId: Int) -> Unit
 ) {
-    LazyColumn(modifier = Modifier.padding(MEDIUM_SPACE)) {
-        items(
-            items = listToDoTask,
-            key = {
-                it.id
+        LazyColumn(modifier = Modifier.padding(MEDIUM_SPACE)) {
+            items(
+                items = listToDoTask,
+                key = {
+                    it.id
+                }
+            ) { task ->
+                TaskItem(todoTask = task, navigateToTaskScreen = navigationToTask)
+                Spacer(modifier = Modifier.height(MEDIUM_SPACE))
             }
-        ) { task ->
-            TaskItem(todoTask = task, navigateToTaskScreen = navigationToTask)
-            Spacer(modifier = Modifier.height(MEDIUM_SPACE))
-        }
     }
 }
 

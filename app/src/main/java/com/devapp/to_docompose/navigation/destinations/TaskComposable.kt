@@ -1,15 +1,21 @@
 package com.devapp.to_docompose.navigation.destinations
 
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
+import com.devapp.to_docompose.ui.screens.task.TaskScreen
+import com.devapp.to_docompose.ui.viewmodels.SharedViewModel
 import com.devapp.to_docompose.util.Action
+import com.devapp.to_docompose.util.Constants
 import com.devapp.to_docompose.util.Constants.LIST_SCREEN
 import com.devapp.to_docompose.util.Constants.TASK_ARGUMENT_KEY
 import com.devapp.to_docompose.util.Constants.TASK_SCREEN
 
 fun NavGraphBuilder.taskComposable(
+    sharedViewModel: SharedViewModel,
     navigateToListScreen:(Action)->Unit
 ){
     composable(
@@ -20,6 +26,13 @@ fun NavGraphBuilder.taskComposable(
             }
         )
     ){
-
+        val taskID = it.arguments?.getInt(Constants.TASK_ARGUMENT_KEY)
+        if (taskID != null) {
+            sharedViewModel.getSelectedTask(taskId = taskID)
+            val selectedTask by sharedViewModel.selectedTask.collectAsState()
+            TaskScreen(
+                todoTask= selectedTask,
+                navigateToListScreen = navigateToListScreen)
+        }
     }
 }

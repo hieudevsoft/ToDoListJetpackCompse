@@ -298,6 +298,7 @@ fun SearchAppBar(
     }
 }
 
+
 @Composable
 @Preview
 private fun DefaultListAppBarPreview() {

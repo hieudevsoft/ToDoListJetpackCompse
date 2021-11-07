@@ -6,5 +6,5 @@ enum class Action {
     DELETE,
     UNDO,
     DELETE_ALL,
-    NO_ACTION
+    NO_ACTION,
 }
