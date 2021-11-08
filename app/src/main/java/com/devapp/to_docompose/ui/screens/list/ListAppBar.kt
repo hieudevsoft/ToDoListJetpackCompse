@@ -33,7 +33,7 @@ import com.devapp.to_docompose.ui.theme.TOP_APP_BAR_HEIGHT
 import com.devapp.to_docompose.ui.viewmodels.SharedViewModel
 import com.devapp.to_docompose.util.Action
 import com.devapp.to_docompose.util.SearchAppBarState
-import com.devapp.to_docompose.util.TrailingIconState
+
 
 @Composable
 fun ListAppBar(
@@ -217,9 +217,6 @@ fun SearchAppBar(
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit
 ) {
-    var trailingIconState: TrailingIconState by remember {
-        mutableStateOf(TrailingIconState.READY_TO_CLOSE)
-    }
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -262,22 +259,10 @@ fun SearchAppBar(
             trailingIcon = {
                 IconButton(
                     onClick = {
-                        when (trailingIconState) {
-                            TrailingIconState.READY_TO_CLEAR -> {
-                                onTextChange("")
-                                trailingIconState = TrailingIconState.READY_TO_CLOSE
-                            }
-                            TrailingIconState.READY_TO_CLOSE -> {
-                                if (text.isNotEmpty()) {
-                                    onTextChange("")
-                                } else {
-                                    onCloseClicked()
-                                    trailingIconState = TrailingIconState.READY_TO_CLEAR
-                                }
-                            }
-                            else -> {
-
-                            }
+                        if(text.isNotEmpty()){
+                            onTextChange("")
+                        }else{
+                            onCloseClicked()
                         }
                     },
                 ) {

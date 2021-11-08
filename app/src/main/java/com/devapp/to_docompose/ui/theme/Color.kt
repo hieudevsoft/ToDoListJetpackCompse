@@ -19,6 +19,9 @@ val MediumPriorityColor = Color(0xFFFFC114)
 val HighPriorityColor = Color(0xFFFF4646)
 val NonePriorityColor = Color(0xFF4B4B4B)
 
+val Colors.splashBackGround:Color
+    get()= if(isLight) Purple700 else DarkGray
+
 val Colors.todoItemBackgroundColor:Color
     get()= if(isLight) Color.White else Color.Black
 

@@ -21,10 +21,6 @@ fun ListScreen(
     sharedViewModel: SharedViewModel
 ) {
     val TAG = "ListScreen"
-    LaunchedEffect(key1 = true) {
-        sharedViewModel.getAllTask()
-        sharedViewModel.readSortState()
-    }
     val action: Action by sharedViewModel.action
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
@@ -71,6 +67,7 @@ fun ListScreen(
                     action,task->
                     sharedViewModel.action.value = action
                     sharedViewModel.updateTaskFields(task = task)
+                    scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
                 }
             )
         },
@@ -107,7 +104,6 @@ fun DisplaySnackBar(
     action: Action,
     onUndoClicked: (Action) -> Unit
 ) {
-    handleDatabaseActions()
     val scopeCoroutine = rememberCoroutineScope()
     LaunchedEffect(key1 = action) {
         if (action != Action.NO_ACTION) {
@@ -123,6 +119,7 @@ fun DisplaySnackBar(
                     onUndoClicked(it)
                 }
             }
+            handleDatabaseActions()
         }
     }
 }
