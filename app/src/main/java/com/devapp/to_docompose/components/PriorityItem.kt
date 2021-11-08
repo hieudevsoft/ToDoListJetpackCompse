@@ -24,7 +24,7 @@ fun PriorityItem(priority: Priority) {
             drawCircle(color = priority.color)
         }
         Spacer(modifier = Modifier.size(LARGE_SPACE))
-        Text(text = priority.name, style = Typography.subtitle1,color = MaterialTheme.colors.onSurface)
+        Text(text = priority.name, style = Typography.subtitle2,color = MaterialTheme.colors.onSurface)
     }
 }
 

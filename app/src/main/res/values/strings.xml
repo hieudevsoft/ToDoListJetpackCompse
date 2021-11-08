@@ -2,4 +2,8 @@
     <string name="app_name">To-Do Compose</string>
     <string name="search_place_holder">Search...</string>
     <string name="empty_content">No Data Found</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="title_delete">Remove \'%1$s\' ?</string>
+    <string name="message_delete">Are you want remove \'%1$s\' ?</string>
 </resources>

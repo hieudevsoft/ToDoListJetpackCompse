@@ -2,6 +2,7 @@ package com.devapp.to_docompose.ui.theme
 
 import androidx.compose.ui.unit.dp
 
+val LARGEST_PADDING = 24.dp
 val LARGE_SPACE = 12.dp
 val MEDIUM_SPACE = 8.dp
 val SMALL_SPACE = 6.dp

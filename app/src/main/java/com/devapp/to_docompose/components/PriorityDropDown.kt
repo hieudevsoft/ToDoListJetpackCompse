@@ -35,11 +35,11 @@ fun PriorityDropDown(
     val angle by animateFloatAsState(targetValue = if(expanded) 180f else 0f)
     Row(
         modifier = Modifier
-            .background(MaterialTheme.colors.todoItemBackgroundColor)
-            .fillMaxWidth()
+            .background(MaterialTheme.colors.background)
             .height(PRIORITY_DROPDOWN_HEIGHT)
             .clickable { expanded = true }
             .border(
+                shape=MaterialTheme.shapes.small,
                 width = 1.dp,
                 color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
             ),
@@ -74,7 +74,7 @@ fun PriorityDropDown(
             )
         }
         DropdownMenu(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(fraction = 0.94f),
             expanded = expanded,
             onDismissRequest = {
                 expanded = false

@@ -4,7 +4,12 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.text.style.TextOverflow
+import com.devapp.to_docompose.components.DisplayAlertDialog
 import com.devapp.to_docompose.data.models.Priority
 import com.devapp.to_docompose.data.models.ToDoTask
 import com.devapp.to_docompose.ui.theme.topBarBackgroundColor
@@ -91,7 +96,7 @@ fun ExistingTaskAppBar(
         },
         backgroundColor = MaterialTheme.colors.topBarBackgroundColor,
         actions = {
-            DeleteAction(onDeleteClicked = navigateToListScreen)
+            DeleteAction(title=selectedTask.title,onDeleteClicked = navigateToListScreen)
             UpdateAction(onUpdateClicked = navigateToListScreen)
         }
     )
@@ -113,10 +118,25 @@ fun CloseAction(onCloseClicked: (Action) -> Unit) {
 }
 
 @Composable
-fun DeleteAction(onDeleteClicked: (Action) -> Unit) {
+fun DeleteAction(
+    title:String,
+    onDeleteClicked: (Action) -> Unit) {
+    var openDialog by remember {
+        mutableStateOf(false)
+    }
+    DisplayAlertDialog(
+        title =title,
+        openDialog = openDialog,
+        onYesClicked = {
+            onDeleteClicked(Action.DELETE)
+            openDialog = false
+        }
+    ) {
+        openDialog = false
+    }
     IconButton(
         onClick = {
-            onDeleteClicked(Action.DELETE)
+            openDialog = true
         },
     ) {
         Icon(
